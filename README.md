@@ -2,13 +2,12 @@
 
 React Native library to detect clicks outside the component 👆
 
----
+
 ![Build status - typescript compile](https://img.shields.io/github/actions/workflow/status/jakex7/react-native-click-outside/ci.yml?branch=main)
 ![License badge](https://img.shields.io/npm/l/react-native-click-outside)
 ![Latest, released version](https://img.shields.io/github/v/release/jakex7/react-native-click-outside)
 ![Date of latest commit](https://img.shields.io/github/last-commit/jakex7/react-native-click-outside)
 
----
 
 ## 🪄 Installation
 
