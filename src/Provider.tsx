@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { GestureResponderEvent, Platform, StyleSheet, View } from 'react-native';
 import { onTouch, setIsTouch } from './utils/collection';
 import { isInRange } from './utils/helpers';
 
@@ -37,6 +37,12 @@ export const ClickOutsideProvider: FC<ClickOutsideProviderProps> = ({
       touchY = e.nativeEvent.changedTouches[0]?.pageY;
       setIsTouch(true);
     }}
+    {...(Platform.OS === 'web' && {
+      onClick: (e: GestureResponderEvent) => {
+        setIsTouch(true);
+        onTouch(e);
+      },
+    })}
   >
     {children}
   </View>
