@@ -1,19 +1,18 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-click-outside';
+import { ClickOutsideProvider, useClickOutside } from 'react-native-click-outside';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
+  const refA = useClickOutside<Text>(() => console.log('clicked outside A'));
+  const refB = useClickOutside<Text>(() => console.log('clicked outside B'));
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <ClickOutsideProvider activateOnSwipe>
+      <View style={styles.container}>
+        <Text ref={refA}>AAAAAAA</Text>
+        <Text ref={refB}>BBBBBBB</Text>
+      </View>
+    </ClickOutsideProvider>
   );
 }
 
