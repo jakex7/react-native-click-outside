@@ -1,30 +1,39 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { ClickOutsideProvider, useClickOutside } from 'react-native-click-outside';
+import { StyleSheet, Text, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { SimpleExample } from './SimpleExample';
+import { DropdownExample } from './DropdownExample';
 
+const stages = ['simple', 'dropdown'] as const;
 export default function App() {
-  const refA = useClickOutside<Text>(() => console.log('clicked outside A'));
-  const refB = useClickOutside<Text>(() => console.log('clicked outside B'));
+  const [stage, setStage] = React.useState<(typeof stages)[number] | undefined>();
+  if (stage === 'simple') return <SimpleExample />;
+  if (stage === 'dropdown') return <DropdownExample />;
   return (
-    <ClickOutsideProvider activateOnSwipe>
-      <View style={styles.container}>
-        <Text ref={refA}>AAAAAAA</Text>
-        <Text ref={refB}>BBBBBBB</Text>
-      </View>
-    </ClickOutsideProvider>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.header}>react-native-click-outside</Text>
+      <ScrollView style={styles.container}>
+        {stages.map((s) => (
+          <TouchableOpacity onPress={() => setStage(s)} key={s} style={styles.button}>
+            <Text style={styles.label}>{s}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
+  container: { flex: 1 },
+  header: { textAlign: 'center', fontSize: 24, margin: 16 },
+  button: {
+    marginBottom: 16,
+    marginHorizontal: 16,
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#BDC3C7',
+    padding: 16,
+    borderRadius: 8,
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
+  label: { color: '#111820' },
 });
