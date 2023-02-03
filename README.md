@@ -1,31 +1,56 @@
 # react-native-click-outside
 
-Detect if user clicked outside the component
+React Native library to detect clicks outside the component 👆
 
-## Installation
-
-```sh
-npm install react-native-click-outside
-```
-
-## Usage
-
-```js
-import { multiply } from 'react-native-click-outside';
-
-// ...
-
-const result = await multiply(3, 7);
-```
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## License
-
-MIT
+---
+![Build status - typescript compile](https://img.shields.io/github/actions/workflow/status/jakex7/react-native-click-outside/ci.yml?branch=main)
+![License badge](https://img.shields.io/npm/l/react-native-click-outside)
+![Latest, released version](https://img.shields.io/github/v/release/jakex7/react-native-click-outside)
+![Date of latest commit](https://img.shields.io/github/last-commit/jakex7/react-native-click-outside)
 
 ---
 
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+## 🪄 Installation
+
+```sh
+yarn add react-native-click-outside
+```
+
+## 📖 Usage
+
+First of all, you need to wrap your app with `ClickOutsideProvider` as high as possible, for example in `App.tsx`:
+
+```tsx
+import { ClickOutsideProvider } from 'react-native-click-outside';
+
+export const App = () => (
+  <ClickOutsideProvider>
+    { /* rest of your app */ }
+  </ClickOutsideProvider>
+);
+```
+
+Then you can call `useClickOutside` hook to detect clicks outside the component. First argument is the function that will be called every time user clicks outside of this component. It returns `ref` that you need to attach to the component you want to detect clicks outside of. For example:
+
+```tsx
+import { useClickOutside } from 'react-native-click-outside';
+
+export default function MyComponent() {
+  const ref = useClickOutside<View>(() => console.log('clicked outside A'));
+  return (
+    <View ref={ref}>
+      <Text>Test</Text>
+    </View>
+  );
+}
+```
+
+## ⚖️ License
+
+**[MIT](/LICENSE)**
+
+## 📝 Contribute
+
+See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+
+## 🏢 Built with ♥️ by Jakub Grzywacz
