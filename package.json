@@ -1,6 +1,6 @@
 {
   "name": "react-native-click-outside",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "description": "React Native library to detect clicks outside the component 👆",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
