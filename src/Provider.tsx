@@ -6,7 +6,7 @@ import { isInRange } from './utils/helpers';
 type ClickOutsideProviderProps = {
   activateOnSwipe?: boolean;
   swipeThreshold?: number;
-  children: JSX.Element;
+  children: React.ReactNode;
 };
 
 let touchX: number | undefined;
