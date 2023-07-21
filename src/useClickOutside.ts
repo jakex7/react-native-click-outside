@@ -10,26 +10,28 @@ type HookConfig = {
 
 export const useClickOutside = <T = View>(callback: () => void, config?: HookConfig): React.RefObject<T> => {
   const callbackRef = React.useRef(callback);
+  callbackRef.current = callback;
+  const callbackRegisterWrapper = () => callbackRef.current();
+
   const ref = React.useRef<T>(null);
 
   useFocusEffect(
     () => {
       if (config?.triggerOnBlur === false) return;
-      register(ref, callbackRef.current);
+      register(ref, callbackRegisterWrapper);
     },
     () => {
       if (config?.triggerOnBlur === false) return;
-      callbackRef.current();
+      callbackRegisterWrapper();
       unregister(ref);
     }
   );
   React.useEffect(() => {
-    register(ref, callbackRef.current);
+    register(ref, callbackRegisterWrapper);
     return () => {
       unregister(ref);
       if (config?.triggerOnUnmount === false) return;
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      callbackRef.current();
+      callbackRegisterWrapper();
     };
   }, [config?.triggerOnUnmount]);
 
