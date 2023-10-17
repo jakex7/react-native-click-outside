@@ -44,6 +44,25 @@ export default function MyComponent() {
 }
 ```
 
+## 🛠️ Troubleshooting
+
+### iOS works fine, but Android doesn't
+As stated in react-native docs, on Android
+
+> Views that are only used to layout their children or otherwise don't draw anything may be automatically removed from the native hierarchy as an optimization.
+
+_Source: https://reactnative.dev/docs/view#collapsable-android_
+
+If your element is collapsable, it won't be rendered, and therefore you won't be able to detect clicks outside of it.
+To prevent this, you need to add `collapsable={false}` prop to the component. For example:
+
+```tsx
+const ref = useClickOutside<View>(() => console.log('clicked outside'));
+<View collapsable={false} ref={ref}>
+  <Text>Test</Text>
+</View>
+```
+
 ## ⚖️ License
 
 **[MIT](/LICENSE)**
